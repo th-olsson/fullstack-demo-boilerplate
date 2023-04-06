@@ -59,3 +59,15 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model GroceryList {
+    id        Int       @id @default(autoincrement())
+    groceries Grocery[]
+}
+
+model Grocery {
+    id            Int          @id @default(autoincrement())
+    name          String
+    GroceryList   GroceryList? @relation(fields: [groceryListId], references: [id], map: "grocery_list")
+    groceryListId Int?         @map("grocery_list_id")
+}
