@@ -4,15 +4,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-const schema = z.object({
+export const createGrocerySchema = z.object({
   name: z.string(),
 });
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.infer<typeof createGrocerySchema>;
 
 export default function Groceries() {
   const { register, handleSubmit } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(createGrocerySchema),
   });
 
   function onSubmit(data: FormValues) {
