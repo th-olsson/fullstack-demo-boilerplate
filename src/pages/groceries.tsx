@@ -3,6 +3,7 @@ import { Box, Button, TextInput } from "@mantine/core";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { api } from "@/utils/api";
 
 export const createGrocerySchema = z.object({
   name: z.string(),
@@ -14,9 +15,11 @@ export default function Groceries() {
   const { register, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(createGrocerySchema),
   });
+  const createGrocery = api.grocery.createGrocery.useMutation();
 
   function onSubmit(data: FormValues) {
-    console.log(data);
+    // console.log(data);
+    createGrocery.mutate(data);
   }
 
   return (
